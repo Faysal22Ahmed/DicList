@@ -21,15 +21,12 @@ public class MainActivity extends AppCompatActivity
 
     DictionaryFragment dictionaryFragment;
     BookmarkFragment bookmarkFragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -42,7 +39,10 @@ public class MainActivity extends AppCompatActivity
 
         dictionaryFragment = new DictionaryFragment();
         bookmarkFragment = new BookmarkFragment();
-        goToFragment(dictionaryFragment,true);
+
+        gotoFragment(dictionaryFragment,true);
+
+
     }
 
     @Override
@@ -83,9 +83,22 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if(id==R.id.nav_bookmark){
-            goToFragment(bookmarkFragment,false);
+
+
+        if(id == R.id.nav_bookmark){
+            gotoFragment(bookmarkFragment,false);
         }
+
+
+      /*  if(fragment!=null){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.screen_area,fragment);
+
+            fragmentTransaction.commit();
+        }*/
+
 
 
 
@@ -93,15 +106,16 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    void goToFragment(Fragment fragment, boolean isTop){
+    void gotoFragment(Fragment fragment, boolean isTop){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-
-        fragmentTransaction.add(R.id.fragment_container,fragment);
+        fragmentTransaction.replace(R.id.screen_area,fragment);
         if(!isTop){
             fragmentTransaction.addToBackStack(null);
         }
+
         fragmentTransaction.commit();
     }
+
 }
