@@ -2,18 +2,17 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+
 
     >
-
-
-    <TextView
+    <ListView
+        android:id="@+id/ListId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="It is main page!!"
-        android:gravity="center"
-        android:textSize="50dp"
+        android:layout_height="match_parent"
 
         />
+
+
+
 
 </FrameLayout>

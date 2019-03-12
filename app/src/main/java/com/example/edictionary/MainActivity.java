@@ -15,12 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DictionaryFragment dictionaryFragment;
     BookmarkFragment bookmarkFragment;
+    DetailFragment detailFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +41,25 @@ public class MainActivity extends AppCompatActivity
 
         dictionaryFragment = new DictionaryFragment();
         bookmarkFragment = new BookmarkFragment();
+        detailFragment = new DetailFragment();
 
         gotoFragment(dictionaryFragment,true);
+
+        dictionaryFragment.setOnFragmentListener(new FragmentListener() {
+            @Override
+            public void onItemClick(String value) {
+                Toast.makeText(MainActivity.this,value, Toast.LENGTH_LONG).show();
+                 gotoFragment(new DetailFragment(), false);
+            }
+        });
+        bookmarkFragment.setOnFragmentListener(new FragmentListener() {
+            @Override
+            public void onItemClick(String value) {
+                Toast.makeText(MainActivity.this,value, Toast.LENGTH_LONG).show();
+                gotoFragment(new DetailFragment(), false);
+
+            }
+        });
 
 
     }

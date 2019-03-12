@@ -7,12 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class BookmarkFragment extends Fragment {
+    private FragmentListener listener;
+    private String value= "Hello";
+    public BookmarkFragment(){
 
-    @Nullable
-    @Override
+    }
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_bookmark,null);
     }
@@ -21,11 +24,19 @@ public class BookmarkFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.ButtonId).setOnClickListener(new View.OnClickListener() {
+
+        Button myButton = (Button)view.findViewById(R.id.ButtonId);
+        myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"Yes!!",Toast.LENGTH_LONG).show();
+                if(listener!=null)
+                    listener.onItemClick(value);
+
             }
         });
+
+    }
+    public void setOnFragmentListener(FragmentListener listener){
+        this.listener= listener;
     }
 }
